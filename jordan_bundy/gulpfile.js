@@ -1,6 +1,8 @@
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
+var webpack = require('webpack-stream');
+
 var appFiles = ['index.js', 'lib/**/*.js'];
 var testFiles = ['test/**/*.js'];
 
@@ -34,11 +36,27 @@ gulp.task('mocha:test', function() {
     }))
 });
 
+gulp.task('static:dev', function() {
+  gulp.src('app/**/*.html')
+  .pipe(gulp.dest('build/'));
+});
+
+gulp.task('webpack:dev', function() {
+  gulp.src('app/js/entry.js')
+  .pipe(webpack({
+    output: {
+      filename: 'bundle.js'
+    }
+  }))
+  .pipe(gulp.dest('build/'));
+});
+
 gulp.task('watch', function() {
   gulp.watch(['./**/*', '!./package.json'], ['jshint', 'mocha']);
 });
 
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('mocha', ['mocha:test']);
-gulp.task('default', ['jshint', 'mocha', 'watch']);
+gulp.task('build:dev', ['webpack:dev', 'static:dev']);
+gulp.task('default', ['jshint', 'mocha', 'watch', 'build:dev']);
 
