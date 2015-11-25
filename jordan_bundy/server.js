@@ -6,6 +6,10 @@ var fs = require('fs');
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/caffeine_dev');
 
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/app/index.html');
+});
+
 app.get('/:filename', function(req, res, next) {
   fs.stat(__dirname + '/build/' + req.params.filename, function(err, stats) {
     if (err) {
