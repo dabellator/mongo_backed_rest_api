@@ -6,8 +6,6 @@ chai.use(chaihttp);
 process.env.MONGOLAB_URI = 'mongodb://localhost/caffeine_test';
 require(__dirname + '/../server');
 var mongoose = require('mongoose');
-var Developer = require(__dirname + '/../models/developer');
-var Caffeine = require(__dirname + '/../models/caffeine');
 
 describe('developer caffeine routes', function() {
   after(function(done) {

@@ -2,7 +2,9 @@ var mongoose = require('mongoose');
 var app = require('express')();
 var developerRouter = require(__dirname + '/routes/developer_routes');
 var caffeineRouter = require(__dirname + '/routes/caffeine_routes');
+var authRouter = require(__dirname + '/routes/auth_routes');
 var fs = require('fs');
+process.env.APP_SECRET = process.env.APP_SECRET || 'justatest';
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/caffeine_dev');
 
@@ -10,6 +12,8 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/app/index.html');
 });
 
+app.use('/drip', developerRouter, caffeineRouter);
+app.use(authRouter);
 app.get('/:filename', function(req, res, next) {
   fs.stat(__dirname + '/build/' + req.params.filename, function(err, stats) {
     if (err) {
@@ -22,7 +26,6 @@ app.get('/:filename', function(req, res, next) {
   });
 });
 
-app.use('/drip', developerRouter, caffeineRouter);
 
 app.get('/drip', function(req, res) {
   res.writeHead(200, {'content-type': 'text/plain'});
