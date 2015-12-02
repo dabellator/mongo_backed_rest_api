@@ -18,13 +18,12 @@ module.exports = function(app) {
     };
 
     $scope.processForm = function(developer) {
-      console.log('why? ' + developer.edit);
       developer.edit ? $scope.update(developer) : 
         $scope.create(developer);
     };
 
     $scope.cancel = function() {
-      console.log(this);
+      $scope.newDeveloper = null;
     };
 
     $scope.getAll = function() {
