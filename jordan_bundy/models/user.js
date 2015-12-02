@@ -18,7 +18,6 @@ userSchema.methods.hashPassword = function(password, cb) {
     if (err) throw err;
     return bcrypt.hash(password, salt, function(err, hash) {
       if (err) throw err;
-      debugger;
       this.auth.basic.password = hash;
       cb();
     }.bind(this));

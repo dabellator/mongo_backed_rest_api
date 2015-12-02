@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head></head>
-<body data-ng-app="bearstream">
-  <main data-ng-controller="GreetingController">
-  <h1>Sweetness</h1>
+<body data-ng-app="CaffeineApp">
+  <h1>Welcome, thirsty Developer</h1>
+  <main data-ng-controller="DevelopersController" data-ng-init="getAll()">
   <h2>{{greeting}}</h2>
+  <form name="newDeveloperForm" data-ng-submit="processForm(newDeveloper)">
+    <h2>New Developer:</h2>
+    <label for="newDeveloperName">Name:</label>
+    <input type="text" id="newDeveloperName" required data-ng-model="newDeveloper.name">
+    <label for="newDeveloperLanguage">Language:</label>
+    <input type="text" id="newDeveloperLanguage" data-ng-model="newDeveloper.language">
 
-  <input type="text" data-ng-model="greeting">
+    <button type="submit" data-ng-disabled>Process</button>
+    <button data-ng-if="newDeveloper.edit" data-ng-click="cancel">Cancel</button>
+
+
+  </form>
+  <section>
+    <ul>
+      <li data-ng-repeat="developer in developers">
+        {{developer.name}}
+        <button data-ng-click="editForm(developer)">Edit</button>
+        <button data-ng-click="remove(developer)">Delete</button>
+      </li>
+    </ul>
+
   </main>
   <script src="bundle.js"></script>
 </body>

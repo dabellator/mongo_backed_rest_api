@@ -6,8 +6,15 @@ var Caffeine = require(__dirname + '/../models/caffeine');
 
 var developerRouter = module.exports = express.Router();
 
-developerRouter.get('/developer/:name', function(req, res) {
-  Developer.find({name: req.params.name}, function(err, data) {
+developerRouter.get('/developers/', function(req, res) {
+  Developer.find({}, function(err, data) {
+    if (err) return handleErr(err, res);
+    res.json(data);
+  });
+});
+
+developerRouter.get('/developer/:id', function(req, res) {
+  Developer.find({_id: req.params.id}, function(err, data) {
     if (err) return handleErr(err, res);
     res.json(data);
   })
@@ -19,6 +26,22 @@ developerRouter.post('/developer', bodyParser.json(), function(req, res) {
     if (err) return handleErr(err, res);
     res.json(data);
   })
+});
+
+developerRouter.put('/developer/:id', bodyParser.json(), function(req,res) {
+  var devPerson = req.body;
+  delete devPerson._id;
+  Developer.update({_id: req.params.id}, devPerson, function(err) {
+    if (err) return handleErr(err, res);
+    res.json({msg: 'success'});
+  });
+});
+
+developerRouter.delete('/developer/:id', function(req, res) {
+  Developer.remove({_id: req.params.id}, function(err) {
+    if (err) return handleErr(err, res);
+    res.json({msg: 'success'});
+  });
 });
 
 developerRouter.put('/developer/caffeine/:name', function(req, res) {
@@ -43,3 +66,4 @@ developerRouter.delete('/developer/:name', function(req, res) {
     res.json({info: 'dead'});
   })
 });
+

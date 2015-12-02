@@ -9,9 +9,17 @@ require(__dirname + '/../server');
 var mongoose = require('mongoose');
 
 describe('The Auth routes', function() {
+
+  before(function(done) {
+    chai.request('localhost:3000')
+      .post('/signup')
+      .send({username:'test',password:'nopass'})
+      .end(function(err, res) {
+        done();
+      });
+  });
   after(function(done) {
     mongoose.connection.db.dropDatabase(function() {
-      console.log('done it');
       done();
     });
   });
@@ -22,18 +30,29 @@ describe('The Auth routes', function() {
       .send({username:'jordan',password:'secret123'})
       .end(function(err, res) {
         expect(err).to.eql(null);
-        expect(res.body.token).to.exist;
-        done()
+        expect(res.body).to.have.property('token');
+        done();
+      });
+  });
+
+  it('should only allow unique usernames', function(done) {
+    chai.request('localhost:3000')
+      .post('/signup')
+      .send({username:'test',password:'whatever'})
+      .end(function(err, res) {
+        expect(err).to.eql(null);
+        expect(res.body).to.have.property('msg');
+        done();
       });
   });
 
   it('should log a user in', function(done) {
     chai.request('localhost:3000')
       .get('/signin')
-      .auth('jordan', 'secret123')
+      .auth('test', 'nopass')
       .end(function(err, res) {
         expect(err).to.eql(null);
-        expect(res.body.token).to.exist;
+        expect(res.body).to.have.property('token');
         done();
       });
   });

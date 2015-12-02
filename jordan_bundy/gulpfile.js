@@ -34,6 +34,9 @@ gulp.task('mocha:test', function() {
       read: false,
       reporter: 'nyan'
     }))
+    .once('end', function() {
+      console.log(process.exit);
+    })
 });
 
 gulp.task('static:dev', function() {
