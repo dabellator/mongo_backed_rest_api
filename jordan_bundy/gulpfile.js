@@ -2,6 +2,8 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var webpack = require('webpack-stream');
+var concatCss = require('gulp-concat-css');
+var minifyCss = require('gulp-minify-css');
 
 var appFiles = ['index.js', 'lib/**/*.js'];
 var testFiles = ['test/**/*.js'];
@@ -37,6 +39,14 @@ gulp.task('mocha:test', function() {
     .once('end', function() {
       console.log(process.exit);
     })
+});
+
+gulp.task('css:dev', function() {
+  return gulp.src([
+    'app/css/base.css',
+    'app/css/layout.css',
+    'app/css/module.css'
+  ]).pipe(concatCss('styles.min.css')).pipe(minifyCss()).pipe(gulp.dest('build/'));
 });
 
 gulp.task('static:dev', function() {
