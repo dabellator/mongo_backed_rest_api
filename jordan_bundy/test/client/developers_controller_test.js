@@ -14,10 +14,10 @@ describe('developer controller', function() {
   }));
 
   it('should be able to run', function() {
-    var controller = new $ControllerConstructor('DeveloperController', {$scope: $scope});
+    var controller = new $ControllerConstructor('DevelopersController', {$scope: $scope});
     expect(typeof $scope).toBe('object');
     expect(typeof controller).toBe('object');
-    expect(Array.isArray($scope.developer)).toBe(true);
+    expect(Array.isArray($scope.developers)).toBe(true);
   });
 });
 
