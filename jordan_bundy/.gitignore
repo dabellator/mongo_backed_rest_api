@@ -6,4 +6,5 @@
 node_modules
 /db
 /build
-
+**/test_bundle.js
+**/*bundle.js

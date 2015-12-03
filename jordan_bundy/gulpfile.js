@@ -64,6 +64,16 @@ gulp.task('webpack:dev', function() {
   .pipe(gulp.dest('build/'));
 });
 
+gulp.task('webpack:test', function() {
+  return gulp.src('test/client/test_entry.js')
+    .pipe(webpack({
+      output: {
+        filename: 'test_bundle.js'
+      }
+    }))
+    .pipe(gulp.dest('test/client/'));
+});
+
 gulp.task('watch', function() {
   gulp.watch(['./**/*', '!./package.json'], ['jshint', 'mocha']);
 });
