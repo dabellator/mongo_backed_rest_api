@@ -1,0 +1,14 @@
+.center-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.test {
+  color: red;
+}
+
+.half {
+  width: 500px;
+  margin: auto;
+}
+

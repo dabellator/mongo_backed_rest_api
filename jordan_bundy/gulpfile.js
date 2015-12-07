@@ -49,6 +49,10 @@ gulp.task('css:dev', function() {
   ]).pipe(concatCss('styles.min.css')).pipe(minifyCss()).pipe(gulp.dest('build/'));
 });
 
+gulp.task('watch:css', function() {
+  gulp.watch(['./app/css/*'], ['css:dev']);
+});
+
 gulp.task('static:dev', function() {
   gulp.src('app/**/*.html')
   .pipe(gulp.dest('build/'));

@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head></head>
-<body data-ng-app="CaffeineApp">
-  <h1>Welcome, thirsty Developer</h1>
-  <main data-ng-controller="DevelopersController" data-ng-init="getAll()">
-  <h2>{{greeting}}</h2>
-  <!--<form name="newDeveloperForm" data-ng-submit="processForm(newDeveloper)">
-  -->  <h2>New Developer:</h2>
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.min.css">  
+</head>
+<body class="center-column" data-ng-app="CaffeineApp">
+  <header class="half">
+    <h1>Welcome, thirsty Developer</h1>
+  </header>
+  <main class="half shadow" data-ng-controller="DevelopersController" data-ng-init="getAll()">
+    <h2>{{greeting}}</h2>
+    <h2>New Developer:</h2>
+
     <label for="newDeveloperName">Name:</label>
     <input type="text" id="newDeveloperName" required data-ng-model="newDeveloper.name">
     <label for="newDeveloperLanguage">Language:</label>
@@ -15,17 +19,15 @@
     <button data-ng-click="processForm(newDeveloper)" data-ng-disabled>Process</button>
     <button data-ng-if="newDeveloper.edit" data-ng-click="cancel()">Cancel</button>
 
-
-  <!-- </form> -->
-  <section>
-    <ul>
-      <li data-ng-repeat="developer in developers">
-        {{developer.name}}
-        <button data-ng-click="editForm(developer)">Edit</button>
-        <button data-ng-click="remove(developer)">Delete</button>
-      </li>
-    </ul>
-
+    <section>
+      <ul>
+        <li data-ng-repeat="developer in developers">
+          {{developer.name}}
+          <button data-ng-click="editForm(developer)">Edit</button>
+          <button data-ng-click="remove(developer)">Delete</button>
+        </li>
+      </ul>
+    </section>
   </main>
   <script src="bundle.js"></script>
 </body>
