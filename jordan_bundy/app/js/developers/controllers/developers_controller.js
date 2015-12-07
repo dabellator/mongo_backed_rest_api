@@ -1,10 +1,10 @@
 module.exports = function(app) {
   app.controller('DevelopersController', ['$scope', '$http', function($scope, $http) {
-    $scope.greeting = 'Gang\'s all here';
+    $scope.errors = [];
     $scope.developers = [];
-    $scope.newDeveloper = null;
+    $scope.defaults = {language: 'javascript'};
+    $scope.newDeveloper = angular.copy($scope.defaults);
     $scope.developer = {};
-    $scope.hold = null;
 
     // create function to resuse same form
     $scope.editForm = function(developer) {
@@ -40,7 +40,7 @@ module.exports = function(app) {
       $http.post('/drip/developer', developer)
         .then(function(res) {
           $scope.developers.push(res.data);
-          $scope.newDeveloper = null;
+          $scope.newDeveloper = angular.copy($scope.defaults);
         }, function(err) {
           console.log(err);
         });
@@ -51,7 +51,7 @@ module.exports = function(app) {
       $http.put('/drip/developer/' + developer._id, developer)
         .then(function(res) {
           console.log('is update');
-          $scope.newDeveloper = null;
+          $scope.newDeveloper = angular.copy($scope.defaults);
         }, function(err) {
           console.log(err)
         });
