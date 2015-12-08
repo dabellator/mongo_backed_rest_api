@@ -1,6 +1,11 @@
-@media screen (max-width: 600px) {
+.app {
+  width: 600px;
+  margin: auto;
+}
+
+@media (max-width: 600px) {
   .app {
-    width: 200px;
+    width: 100%;
    }
 }
 
@@ -9,10 +14,6 @@
   flex-direction: column;
 }
 
-.app {
-  width: 600px;
-  margin: auto;
-}
 
 .common {
   padding: 5px;
@@ -20,6 +21,13 @@
 
 .fields {
   display: flex;
+}
+
+@media (max-width: 600px) {
+  .fields {
+    flex-direction: column;
+    width: 80%;
+  }
 }
 
 .fields label {
