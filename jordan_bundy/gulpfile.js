@@ -4,6 +4,9 @@ var mocha = require('gulp-mocha');
 var webpack = require('webpack-stream');
 var concatCss = require('gulp-concat-css');
 var minifyCss = require('gulp-minify-css');
+var sass = require('gulp-sass');
+var maps = require('gulp-sourcemaps');
+
 
 var appFiles = ['index.js', 'lib/**/*.js'];
 var testFiles = ['test/**/*.js'];
@@ -47,6 +50,14 @@ gulp.task('css:dev', function() {
     'app/css/layout.css',
     'app/css/module.css'
   ]).pipe(concatCss('styles.min.css')).pipe(minifyCss()).pipe(gulp.dest('build/'));
+});
+
+gulp.task('css:sass', function() {
+  return gulp.src('./app/sass/**')
+  .pipe(maps.init())
+  .pipe(sass().on('error', sass.logError))
+  .pipe(minifyCss())
+  .pipe(gulp.dest('build/'))
 });
 
 gulp.task('watch:css', function() {
