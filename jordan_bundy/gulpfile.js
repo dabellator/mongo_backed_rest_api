@@ -44,24 +44,17 @@ gulp.task('mocha:test', function() {
     })
 });
 
-gulp.task('css:dev', function() {
-  return gulp.src([
-    'app/css/base.css',
-    'app/css/layout.css',
-    'app/css/module.css'
-  ]).pipe(concatCss('styles.min.css')).pipe(minifyCss()).pipe(gulp.dest('build/'));
-});
-
 gulp.task('css:sass', function() {
-  return gulp.src('./app/sass/**')
+  return gulp.src('./app/sass/**/*.scss')
   .pipe(maps.init())
   .pipe(sass().on('error', sass.logError))
   .pipe(minifyCss())
+  .pipe(maps.write('./'))
   .pipe(gulp.dest('build/'))
 });
 
-gulp.task('watch:css', function() {
-  gulp.watch(['./app/css/*'], ['css:dev']);
+gulp.task('css:watch', function() {
+  gulp.watch(['./app/sass/**/*.scss', './app/index.html'], ['css:sass', 'static:dev']);
 });
 
 gulp.task('static:dev', function() {
