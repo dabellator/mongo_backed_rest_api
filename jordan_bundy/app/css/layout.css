@@ -1,14 +1,45 @@
+@media screen (max-width: 600px) {
+  .app {
+    width: 200px;
+   }
+}
+
 .center-column {
   display: flex;
   flex-direction: column;
 }
 
-.test {
-  color: red;
+.app {
+  width: 600px;
+  margin: auto;
 }
 
-.half {
-  width: 500px;
-  margin: auto;
+.common {
+  padding: 5px;
+}
+
+.fields {
+  display: flex;
+}
+
+.fields label {
+  margin: 5px;
+}
+
+.form button {
+  margin: 5px;
+}
+
+.list {
+  display: flex;
+  width: 80%
+}
+
+.list-item {
+  flex-grow: 3;
+}
+
+.list-buttons {
+  justify-content: flex-end;
 }
 
