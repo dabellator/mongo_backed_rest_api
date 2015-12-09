@@ -2,6 +2,11 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var webpack = require('webpack-stream');
+var concatCss = require('gulp-concat-css');
+var minifyCss = require('gulp-minify-css');
+var sass = require('gulp-sass');
+var maps = require('gulp-sourcemaps');
+
 
 var appFiles = ['index.js', 'lib/**/*.js'];
 var testFiles = ['test/**/*.js'];
@@ -34,6 +39,23 @@ gulp.task('mocha:test', function() {
       read: false,
       reporter: 'nyan'
     }))
+    .once('end', function() {
+      console.log(process.exit);
+    })
+});
+
+gulp.task('css:sass', function() {
+  return gulp.src('./app/sass/**/*.scss')
+  .pipe(maps.init())
+  .pipe(sass().on('error', sass.logError))
+  .pipe(concatCss('styles.min.css'))
+  .pipe(minifyCss())
+  .pipe(maps.write('./'))
+  .pipe(gulp.dest('build/'))
+});
+
+gulp.task('css:watch', function() {
+  gulp.watch(['./app/sass/**/*.scss', './app/index.html'], ['css:sass', 'static:dev']);
 });
 
 gulp.task('static:dev', function() {
@@ -49,6 +71,16 @@ gulp.task('webpack:dev', function() {
     }
   }))
   .pipe(gulp.dest('build/'));
+});
+
+gulp.task('webpack:test', function() {
+  return gulp.src('test/client/test_entry.js')
+    .pipe(webpack({
+      output: {
+        filename: 'test_bundle.js'
+      }
+    }))
+    .pipe(gulp.dest('test/client/'));
 });
 
 gulp.task('watch', function() {

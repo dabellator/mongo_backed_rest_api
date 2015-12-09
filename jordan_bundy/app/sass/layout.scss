@@ -1,0 +1,47 @@
+.app {
+  width: 600px;
+  margin: auto;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+}
+
+.center-column {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.common {
+  padding: 5px;
+}
+
+.fields {
+  display: flex;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    width: 80%;
+  }
+}
+
+.fields label {
+  margin: 5px;
+}
+
+.form button {
+  margin: 5px;
+}
+
+.list {
+  display: flex;
+  width: 80%
+}
+
+.list-item {
+  flex-grow: 3;
+}
+
+.list-buttons {
+  justify-content: flex-end;
+}
+

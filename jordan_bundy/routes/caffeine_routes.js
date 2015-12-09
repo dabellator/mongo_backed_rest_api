@@ -1,5 +1,5 @@
 var express = require('express');
-var bodyParser = require('body-parser');
+var jsonParse = require('body-parser').json();
 var Caffeine = require(__dirname + '/../models/caffeine');
 var handleErr = require(__dirname + '/../lib/handleErr');
 
@@ -12,11 +12,15 @@ caffeineRouter.get('/caffeine/:type', function(req, res) {
   })
 });
 
-caffeineRouter.post('/caffeine', bodyParser.json(), function(req, res) {
+caffeineRouter.post('/caffeine', jsonParse, function(req, res) {
   var caffUnit = new Caffeine(req.body);
   caffUnit.save(function(err, data) {
     if (err) return handleErr(err, res);
     res.json(data);
   })
 });
+
+//caffeineRouter.put('/caffeine/:id', jsonParse, function(req, res) {
+  
+//});
 

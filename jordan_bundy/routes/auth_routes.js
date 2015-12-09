@@ -7,8 +7,9 @@ var User = require(__dirname + '/../models/user');
 var authRouter = module.exports = express.Router();
 
 authRouter.post('/signup', bodyParser, function(req, res) {
-  // refactor to remove pyramid of doom
-  User.findOne({username: req.body.username}, function(err, user) {
+
+  User.findOne({username: req.body.username}, createUser)
+  function createUser(err, user) {
     if (err) throw err;
     if (user) return res.json({msg: 'already taken'});
 
@@ -25,7 +26,7 @@ authRouter.post('/signup', bodyParser, function(req, res) {
         });
       });
     });
-  });
+  };
 });
 
 authRouter.get('/signin', basicAuth, function (req, res) {

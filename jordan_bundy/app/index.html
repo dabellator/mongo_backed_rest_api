@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head></head>
-<body data-ng-app="bearstream">
-  <main data-ng-controller="GreetingController">
-  <h1>Sweetness</h1>
-  <h2>{{greeting}}</h2>
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.min.css">  
+</head>
+<body class="center-column" data-ng-app="CaffeineApp">
+  <header class="app">
+    <h1>Welcome, thirsty Developer</h1>
+  </header>
+  <main class="app shadow" data-ng-controller="DevelopersController" data-ng-init="getAll()">
+    <h2>{{greeting}}</h2>
 
-  <input type="text" data-ng-model="greeting">
+    <section class="form">
+      <h2 class="title common">New Developer:</h2>
+      <div class="fields common">
+        <label for="newDeveloperName">Name:</label>
+        <input type="text" id="newDeveloperName" required data-ng-model="newDeveloper.name">
+        <label for="newDeveloperLanguage">Language:</label>
+        <input type="text" id="newDeveloperLanguage" data-ng-model="newDeveloper.language">
+      </div>
+      <button data-ng-click="processForm(newDeveloper)" data-ng-disabled>Process</button>
+      <button data-ng-if="newDeveloper.edit" data-ng-click="cancel()">Cancel</button>
+    </section>
+    <section>
+      <ul>
+        <li class="list" data-ng-repeat="developer in developers">
+          <div class="list-item">
+            {{developer.name}}
+          </div>
+          <div class="list-buttons">
+            <button data-ng-click="editForm(developer)">Edit</button>
+            <button data-ng-click="remove(developer)">Delete</button>
+          </div>
+        </li>
+      </ul>
+    </section>
   </main>
   <script src="bundle.js"></script>
 </body>
