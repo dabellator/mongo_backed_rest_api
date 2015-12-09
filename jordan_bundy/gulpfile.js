@@ -48,7 +48,6 @@ gulp.task('css:sass', function() {
   return gulp.src('./app/sass/**/*.scss')
   .pipe(maps.init())
   .pipe(sass().on('error', sass.logError))
-  .pipe(concatCss('styles.min.css'))
   .pipe(minifyCss())
   .pipe(maps.write('./'))
   .pipe(gulp.dest('build/'))

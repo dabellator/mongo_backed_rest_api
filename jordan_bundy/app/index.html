@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" type="text/css" href="styles.min.css">  
+  <link rel="stylesheet" type="text/css" href="application.css">  
 </head>
 <body class="center-column" data-ng-app="CaffeineApp">
   <header class="app">
@@ -24,7 +24,7 @@
     <section>
       <ul>
         <li class="list" data-ng-repeat="developer in developers">
-          <div class="list-item">
+          <div class="list-item background{{$index}}">
             {{developer.name}}
           </div>
           <div class="list-buttons">

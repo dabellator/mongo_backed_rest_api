@@ -1,0 +1,17 @@
+$blue: #0066ff;
+$gradient: #112233;
+
+.form {
+  box-shadow: 3px 3px 3px #ccc;
+}
+
+.form h2 {
+  background: $blue;
+}
+
+// create a series of multi-colored backgrounds
+@for $i from 1 to 10 {
+  .background#{$i} {
+    background-color: $gradient * $i
+  }
+}
