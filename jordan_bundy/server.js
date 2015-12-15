@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var app = require('express')();
+var express = require('express');
+var app = express();
 var developerRouter = require(__dirname + '/routes/developer_routes');
 var caffeineRouter = require(__dirname + '/routes/caffeine_routes');
 var authRouter = require(__dirname + '/routes/auth_routes');
@@ -8,9 +9,7 @@ process.env.APP_SECRET = process.env.APP_SECRET || 'justatest';
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/caffeine_dev');
 
-app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/app/index.html');
-});
+app.use(express.static(__dirname + '/build'));
 
 app.use('/drip', developerRouter, caffeineRouter);
 app.use(authRouter);
@@ -33,7 +32,7 @@ app.get('/drip', function(req, res) {
   res.end()
 });
 
-app.listen(3000, function() {
+app.listen(5000, function() {
   console.log('power up');
 });
 

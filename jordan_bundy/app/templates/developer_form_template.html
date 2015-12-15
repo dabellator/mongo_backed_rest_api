@@ -1,0 +1,12 @@
+<section>
+  <h2 class="title common">New Developer:</h2>
+  <div class="fields common">
+    <label for="developerName">Name:</label>
+    <input type="text" id="developerName" required data-ng-model="developer.name">
+    <label for="developerLanguage">Language:</label>
+    <input type="text" id="developerLanguage" data-ng-model="developer.language">
+  </div>
+  <button data-ng-click="save({developer: developer})" data-ng-disabled>Process</button>
+  <button data-ng-if="newDeveloper.edit" data-ng-click="cancel()">Cancel</button>
+</section>
+

@@ -4,37 +4,7 @@
   <link rel="stylesheet" type="text/css" href="application.css">  
 </head>
 <body class="center-column" data-ng-app="CaffeineApp">
-  <header class="app">
-    <h1>Welcome, thirsty Developer</h1>
-  </header>
-  <main class="app shadow" data-ng-controller="DevelopersController" data-ng-init="getAll()">
-    <h2>{{greeting}}</h2>
-
-    <section class="form">
-      <h2 class="title common">New Developer:</h2>
-      <div class="fields common">
-        <label for="newDeveloperName">Name:</label>
-        <input type="text" id="newDeveloperName" required data-ng-model="newDeveloper.name">
-        <label for="newDeveloperLanguage">Language:</label>
-        <input type="text" id="newDeveloperLanguage" data-ng-model="newDeveloper.language">
-      </div>
-      <button data-ng-click="processForm(newDeveloper)" data-ng-disabled>Process</button>
-      <button data-ng-if="newDeveloper.edit" data-ng-click="cancel()">Cancel</button>
-    </section>
-    <section>
-      <ul>
-        <li class="list" data-ng-repeat="developer in developers">
-          <div class="list-item background{{$index}}">
-            {{developer.name}}
-          </div>
-          <div class="list-buttons">
-            <button data-ng-click="editForm(developer)">Edit</button>
-            <button data-ng-click="remove(developer)">Delete</button>
-          </div>
-        </li>
-      </ul>
-    </section>
-  </main>
+  <main data-ng-view></main>
   <script src="bundle.js"></script>
 </body>
 </html>

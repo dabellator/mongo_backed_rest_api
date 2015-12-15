@@ -1,0 +1,30 @@
+<header class="app">
+  <h1>Developer Factory</h1>
+</header>
+<main class="app shadow" data-ng-controller="DevelopersController" data-ng-init="getAll()">
+  <h2>{{greeting}}</h2>
+  <h2>{{timer}}</h2>
+  <section>
+    <div data-developer-form-directive
+      data-button-text="Hire Developer"
+      data-form-name="newDeveloperForm"
+      data-heading-text="Hire a New Developer"
+      data-developer="newDeveloper"
+      data-save="processForm(developer)">
+    </div>
+  </section>
+
+  <section>
+    <ul >
+      <li class="list" data-ng-repeat="developer in developers">
+        <div class="list-item background{{$index + 1}}">
+          <span>{{developer.name}}</span><span>{{developer.caffeine}}</span>
+        </div>
+        <div class="list-buttons">
+          <button data-ng-click="addCaffeine(developer)">Delete</button>
+        </div>
+      </li>
+    </ul>
+  </section>
+</main>
+
